@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Intrinsics.X86;
 
 namespace ExceptionHandlingExercise
 {
@@ -20,28 +21,54 @@ namespace ExceptionHandlingExercise
             //TODO START HERE:
 
             // 1) Create an char[], it must contain 6 numbers and 3 letters - name it arr
-            
+
+            char[] arr = { '1', '2', 'r', '4', '5', 'o', '7', '8', 'b' };
+
             // 2) Create a list called numbers that will hold integers
-        
+
+            List<int> numbers = new List<int>();
+
             // 3) Create an string variable with an empty string initializer - name it str
-            
-            // 4) Make a foreach loop to iterate through your character array            
+
+            var str = string.Empty;
+
+            // 4) Make a foreach loop to iterate through your character array
+
+            foreach (var character in arr)
+
                 // 5) Create a try-catch inide of your foreach loop
-                    // 6) Inside the try block: 
-                        // 7) Set your string variable to each array element in your char[] to .ToString()
-                        // 8) Now, using int.Parse, parse your string variable and store in an int variable
-                        // 9) Then add each int to your list
-                
-                   // 10) Inside the catch block:
-                       // 11) In the scope of your catch you can use the following code:                  
-                       // Console.WriteLine($"Unable to Parse '{character}'"); //character will be the name of each item in your collection
-                
-            
-            // Uncomment the code below to see the numbers you successfully added to the numbers list: 
-            //foreach (var num in numbers)
-            //{
-            //    Console.WriteLine(num);
-            //}
+
+                try
+                {
+                    // 6) Inside the try block:
+                    // 7) Set your string variable to each array element in your char[] to .ToString()
+
+                    str = character.ToString();
+
+                    // 8) Now, using int.Parse, parse your string variable and store in an int variable
+
+                    var num = int.Parse(str);
+
+                    // 9) Then add each int to your list
+
+                    numbers.Add(num);
+                }
+                catch (FormatException)
+                {
+                    // 10) Inside the catch block:
+                    // 11) In the scope of your catch you can use the following code:
+                    // Console.WriteLine($"Unable to Parse '{character}'"); //character will be the name of each item in your collection
+
+                    Console.WriteLine($"Unable to parse {character}");
+                }
+
+            // Uncomment the code below to see the numbers you successfully added to the numbers list:
+            foreach (var num in numbers)
+            {
+                Console.WriteLine(num);
+            }
         }
     }
 }
+
+   
